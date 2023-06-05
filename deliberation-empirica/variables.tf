@@ -1,8 +1,6 @@
 
 # project-specific variables
-variable "project_name" {
-  default = "deliberation"
-}
+variable "project_name" {}
 variable "region" {}
 variable "subnet_cidr" {}
 variable "public_subnet1" {}

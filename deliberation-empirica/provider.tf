@@ -13,7 +13,7 @@ terraform {
   cloud {
     organization = "css-lab-deliberation"
     workspaces { 
-      name = "deliberation-empirica"
+      name = "deliberation-infrastructure"
     }
   }
 }
