@@ -1,7 +1,15 @@
 
 # project-specific variables
-variable "project_name" {}
-variable "region" {}
+variable "project_name" {
+  type= string
+  description= "name of project"
+  default="deliberation"
+}
+variable "region" {
+  type= string
+  description= "aws region"
+  default="us-east-1"
+}
 variable "subnet_cidr" {}
 variable "public_subnet1" {}
 variable "public_subnet2" {}
