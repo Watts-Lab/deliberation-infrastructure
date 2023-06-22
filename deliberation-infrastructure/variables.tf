@@ -4,6 +4,9 @@ variable "subnet_cidr" {}
 variable "public_subnet1" {}
 variable "public_subnet2" {}
 variable "acm_certificate_arn" {}
+variable "project_name" {}
+
+variable container_image_name {}
 
 # app environment variables
 variable "QUALTRICS_DATACENTER" {}
