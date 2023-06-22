@@ -13,7 +13,7 @@ terraform {
   cloud {
     organization = "css-lab-deliberation"
     workspaces { 
-      tags = ["deliberation"] #need to have each workspace tagged with deliberation manually
+      name = "deliberation-infrastructure"
     }
   }
 }
@@ -25,8 +25,9 @@ provider "aws" {
   default_tags { #tags are used for resources not directly managed by Terraform
     tags = {
       project  = "deliberation"
-      app      = "deliberation-infrastructure"
+      app      = "deliberation-empirica"
       deployBy = "terraform"
     }
   }
 }
+
