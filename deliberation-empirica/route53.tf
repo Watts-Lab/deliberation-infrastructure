@@ -1,6 +1,4 @@
-data "aws_route53_zone" "selected" {
-  name = "deliberation-lab.org"
-}
+
 
 /* resource "aws_route53_record" "study" {
   zone_id = data.aws_route53_zone.selected.zone_id
