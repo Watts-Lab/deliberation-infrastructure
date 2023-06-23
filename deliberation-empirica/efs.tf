@@ -9,6 +9,6 @@ resource "aws_efs_file_system" "efs" {
 # Define the EFS mount target (must be in at least one availability zone)
 resource "aws_efs_mount_target" "efs_mount_target" {
   file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = data.terraform_remote_state.shared.aws_subnet_public1_id
+  subnet_id       = data.terraform_remote_state.outputs.shared.aws_subnet_public1_id
   security_groups = [aws_security_group.efs_sg.id]
 }
