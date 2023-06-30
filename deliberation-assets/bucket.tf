@@ -1,6 +1,6 @@
 //make new s3 bucket
 resource "aws_s3_bucket" "deliberation-assets-bucket"{
-  bucket = "deliberation-assets"
+  bucket = var.bucket_name
 
   tags = {
     deployBy = "terraform"
