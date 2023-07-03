@@ -1,6 +1,28 @@
+data "aws_iam_policy_document" "allow_access" {
+  statement {
+    actions = [
+      "s3:GetObject"
+    ]
+    effect = "Allow"
+    resources = [
+      "*"
+    ]
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+    sid = "AssetsBucketPublicAccess"
+  }
+}
+
 //make new s3 bucket
 resource "aws_s3_bucket" "deliberation-assets" {
   bucket = var.bucket_name
+}
+
+resource "aws_s3_bucket_policy" "public" {
+  bucket = aws_s3_bucket.deliberation-assets.id
+  policy = data.aws_iam_policy_document.s3_bucket.allow_access.json
 }
 
 
