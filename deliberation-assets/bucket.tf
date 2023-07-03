@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "allow_access" {
     ]
     effect = "Allow"
     resources = [
-      "*"
+      "${aws_s3_bucket.deliberation-assets.arn}/*"
     ]
     principals {
       type        = "*"
