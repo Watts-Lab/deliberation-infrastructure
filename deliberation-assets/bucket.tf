@@ -11,6 +11,15 @@ resource "aws_s3_bucket_website_configuration" "deliberation-assets"{
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "deliberation-assets-public-access-block" {
+  bucket = aws_s3_bucket.deliberation-assets.id
+
+  block_public_acls       = false //allow public access
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 //enable versioning to prevent overwriting or deletion and to archive previous versions
 resource "aws_s3_bucket_versioning" "versioning-deliberation-assets" {
   bucket = aws_s3_bucket.deliberation-assets.bucket
