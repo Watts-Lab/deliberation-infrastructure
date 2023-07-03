@@ -1,7 +1,6 @@
 //make new s3 bucket
 resource "aws_s3_bucket" "deliberation-assets" {
   bucket = var.bucket_name
-  policy = 
 }
 
 data "aws_iam_policy_document" "allow_access" {
