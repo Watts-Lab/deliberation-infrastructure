@@ -4,12 +4,12 @@ resource "aws_s3_bucket" "deliberation-assets" {
 }
 
 
-# resource "aws_s3_bucket_website_configuration" "deliberation-assets"{
-#   bucket = aws_s3_bucket.deliberation-assets.bucket
-#   index_document {
-#     suffix = "README.md"
-#   }
-# }
+resource "aws_s3_bucket_website_configuration" "deliberation-assets"{
+  bucket = aws_s3_bucket.deliberation-assets.bucket
+  index_document {
+    suffix = "README.md"
+  }
+}
 
 //enable versioning to prevent overwriting or deletion and to archive previous versions
 resource "aws_s3_bucket_versioning" "versioning-deliberation-assets" {
