@@ -18,13 +18,8 @@ data "aws_iam_policy_document" "allow_access" {
 //make new s3 bucket
 resource "aws_s3_bucket" "deliberation-assets" {
   bucket = var.bucket_name
+  policy = data.aws_iam_policy_document.allow_access.json
 }
-
-resource "aws_s3_bucket_policy" "public" {
-  bucket = aws_s3_bucket.deliberation-assets.id
-  policy = data.aws_iam_policy_document.s3_bucket.allow_access.json
-}
-
 
 resource "aws_s3_bucket_website_configuration" "deliberation-assets"{
   bucket = aws_s3_bucket.deliberation-assets.bucket
