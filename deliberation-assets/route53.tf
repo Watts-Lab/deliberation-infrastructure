@@ -8,8 +8,7 @@ resource "aws_route53_record" "assets" {
   name    = "assets"
   type    = "A"
   alias {
-    # name                   = aws_s3_bucket_website_configuration.deliberation-assets.website_endpoint
-    name                   = "http:${var.bucket_name}.s3-website-${var.region}.amazonaws.com"
+    name                   = aws_s3_bucket_website_configuration.deliberation-assets.website_endpoint
     zone_id                = aws_s3_bucket.deliberation-assets.hosted_zone_id
     evaluate_target_health = true
   }
