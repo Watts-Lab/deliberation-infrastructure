@@ -26,7 +26,7 @@ resource "aws_s3_bucket_policy" "public" {
 }
 
 resource "aws_s3_bucket_website_configuration" "deliberation-assets"{
-  bucket = aws_s3_bucket.deliberation-assets.bucket
+  bucket = aws_s3_bucket.deliberation-assets.id
   index_document {
     suffix = "README.md"
   }
