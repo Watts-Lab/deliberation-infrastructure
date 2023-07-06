@@ -1,1 +1,1 @@
-bucket_name = "deliberation-assets"
+bucket_name = "assets.deliberation-lab.org"
