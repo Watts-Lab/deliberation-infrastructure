@@ -17,19 +17,6 @@ resource "aws_security_group" "app_alb_sg" {
   }
 }
 
-resource "aws_security_group" "efs_sg" {
-  name        = "${var.app_name}-efs-sg"
-  description = "${var.app_name} EFS security group"
-  vpc_id      = aws_vpc.project_vpc.id
-
-  ingress {
-    description     = "Allow only from fargate service"
-    from_port       = 2049
-    to_port         = 2049
-    protocol        = "tcp"
-    security_groups = [aws_security_group.app_ecs_task_sg.id]
-  }
-
 resource "aws_security_group" "app_ecs_task_sg" {
   name   = "${var.app_name}_ecs_task_sg"
   vpc_id = aws_vpc.project_vpc.id
@@ -61,6 +48,19 @@ resource "aws_security_group" "app_ecs_task_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_security_group" "efs_sg" {
+  name        = "${var.app_name}-efs-sg"
+  description = "${var.app_name} EFS security group"
+  vpc_id      = aws_vpc.project_vpc.id
+
+  ingress {
+    description     = "Allow only from fargate service"
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
+    security_groups = [aws_security_group.app_ecs_task_sg.id]
+  }
 
   # Only ingress rules added
   egress {
