@@ -1,5 +1,5 @@
 resource "aws_security_group" "app_alb_sg" {
-  name   = "${var.app_name}_alb_sg"
+  name   = "${var.security_group_name}_alb_sg"
   vpc_id = aws_vpc.project_vpc.id
   ingress {
     from_port        = 443
@@ -18,7 +18,7 @@ resource "aws_security_group" "app_alb_sg" {
 }
 
 resource "aws_security_group" "app_ecs_task_sg" {
-  name   = "${var.app_name}_ecs_task_sg"
+  name   = "${var.security_group_name}_ecs_task_sg"
   vpc_id = aws_vpc.project_vpc.id
   ingress {
     from_port        = 3000

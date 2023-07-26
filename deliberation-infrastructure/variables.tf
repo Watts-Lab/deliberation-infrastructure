@@ -5,6 +5,7 @@ variable "public_subnet1" {}
 variable "public_subnet2" {}
 variable "acm_certificate_arn" {}
 variable "project_name" {}
+variable "security_group_name" {}
 
 # taken from TF_VAR_* environment variables or set on TF cloud
 variable "DAILY_APIKEY" {
