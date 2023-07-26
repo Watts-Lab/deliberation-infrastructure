@@ -1,8 +1,8 @@
 resource "aws_ecs_task_definition" "task_definition" {
   family                   = var.app_name
   network_mode             = "awsvpc"
-  task_role_arn            = data.terraform_remote_state.shared.outputs.aws_iam_role.app_ecs_task_role.arn
-  execution_role_arn       = data.terraform_remote_state.shared.outputs.aws_iam_role.app_ecs_task_execution_role.arn
+  task_role_arn            = data.terraform_remote_state.shared.outputs.aws_iam_role_app_ecs_task_role_arn
+  execution_role_arn       = data.terraform_remote_state.shared.outputs.aws_iam_role_app_ecs_task_execution_role_arn
   requires_compatibilities = ["FARGATE"]
   memory                   = 1024
   cpu                      = 512
