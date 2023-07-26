@@ -28,11 +28,6 @@ output "aws_vpc_project_vpc_id" {
     value = aws_vpc.project_vpc.id
 }
 
-output "aws_security_group_app_albsg_id" {
-    description = "alb security group id"
-    value = aws_security_group.app_alb_sg.id
-}
-
 output "aws_ecs_cluster_id" {
   description = "ecs cluster id"
   value = aws_ecs_cluster.project_cluster.id
@@ -50,4 +45,9 @@ output "aws_iam_role_app_ecs_task_role_arn" {
 output "aws_iam_role_app_ecs_task_execution_role_arn" {
   description = "aws iam role app_ecs_task_execution_role arn"
   value = aws_iam_role.app_ecs_task_execution_role.arn
+}
+
+output "aws_security_group_app_ecs_task_sg_id" {
+  description = "security group for ecs task id"
+  value = aws_security_group.app_ecs_task_sg.id
 }

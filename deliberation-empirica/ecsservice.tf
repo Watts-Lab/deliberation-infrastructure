@@ -9,7 +9,7 @@ resource "aws_ecs_service" "app_ecs_service" {
   enable_execute_command             = true
 
   network_configuration {
-    security_groups  = [aws_security_group.app_ecs_task_sg.id]
+    security_groups  = [data.terraform_remote_state.shared.outputs.aws_security_group_app_ecs_task_sg_id]
     subnets          = [data.terraform_remote_state.shared.outputs.aws_subnet_public1_id, data.terraform_remote_state.shared.outputs.aws_subnet_public2_id]
     assign_public_ip = true
   }
