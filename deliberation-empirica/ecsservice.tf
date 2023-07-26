@@ -14,7 +14,7 @@ resource "aws_ecs_service" "app_ecs_service" {
     assign_public_ip = true
   }
   load_balancer {
-    target_group_arn = data.terraform_remote_state.shared.outputs.aws_lb_target_group.app_alb_target_group.arn
+    target_group_arn = data.terraform_remote_state.shared.outputs.aws_lb_target_group_app_alb_target_group_arn
     container_name   = var.app_name //this might need to change
     container_port   = "3000"
   }
