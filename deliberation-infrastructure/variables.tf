@@ -5,19 +5,7 @@ variable "public_subnet1" {}
 variable "public_subnet2" {}
 variable "acm_certificate_arn" {}
 variable "project_name" {}
-
-variable container_image_name {}
-
-# app environment variables
-variable "QUALTRICS_DATACENTER" {}
-variable "GITHUB_DATA_REPO" {}
-variable "GITHUB_BRANCH" {}
-variable "REACT_APP_TEST_CONTROLS" {}
-variable "app_data_path" {
-  type        = string
-  description = "Path to app data"
-  default     = "/data"
-}
+variable "security_group_name" {}
 
 # taken from TF_VAR_* environment variables or set on TF cloud
 variable "DAILY_APIKEY" {
