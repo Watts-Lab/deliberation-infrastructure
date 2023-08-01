@@ -30,15 +30,7 @@ resource "aws_ecs_task_definition" "task_definition" {
           value = var.QUALTRICS_DATACENTER
         },
         {
-          name  = "GH_DATA_REPO",
-          value = var.GITHUB_DATA_REPO
-        },
-        {
-          name  = "GH_BRANCH",
-          value = var.GITHUB_BRANCH
-        },
-        {
-          name  = "REACT_APP_TEST_CONTROLS",
+          name  = "TEST_CONTROLS",
           value = var.REACT_APP_TEST_CONTROLS
         },
         {
@@ -50,7 +42,7 @@ resource "aws_ecs_task_definition" "task_definition" {
           value = var.QUALTRICS_API_TOKEN
         },
         {
-          name  = "GH_TOKEN",
+          name  = "DELIBERATION_MACHINE_USER_TOKEN",
           value = var.DELIBERATION_MACHINE_USER_TOKEN
         },
         {
