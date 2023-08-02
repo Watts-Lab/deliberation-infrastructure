@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "task_definition" {
   container_definitions = jsonencode([
     {
       "name" : var.app_name,
-      "image" : var.container_image_name,
+      "image" : "ghcr.io/watts-lab/deliberation-empirica:${var.deliberation_empirica_tag}",
       "cpu" : 0,
       "portMappings" : [
         {
@@ -48,6 +48,18 @@ resource "aws_ecs_task_definition" "task_definition" {
         {
           name  = "EMPIRICA_ADMIN_PW",
           value = var.EMPIRICA_ADMIN_PW
+        },
+        {
+          name = "DATA_DIR",
+          value = var.app_data_path
+        },
+        {
+          name = "CONTAINER_IMAGE_VERSION_TAG",
+          value = var.deliberation_empirica_tag
+        },
+        {
+          name = "AWS_REGION",
+          value = var.region
         }
       ],
       mountPoints = [
