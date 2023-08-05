@@ -63,3 +63,26 @@ resource "aws_iam_role" "app_ecs_task_role" {
     "arn:aws:iam::aws:policy/AmazonS3FullAccess"
   ]
 }
+
+resource "aws_iam_role" "datasync_role" {
+  name = "${var.app_name}_datasync_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Principal = {
+          Service = "datasync.amazonaws.com"
+        }
+        Effect = "Allow"
+        Sid    = ""
+      }
+    ]
+  })
+  managed_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+    "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+    "arn:aws:iam::aws:policy/AWSDatasyncReadOnlyAccess"
+  ]
+}

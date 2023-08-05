@@ -15,7 +15,9 @@ variable "deliberation_empirica_tag" {
 
 # app environment variables
 variable "QUALTRICS_DATACENTER" {}
-variable "REACT_APP_TEST_CONTROLS" {}
+variable "REACT_APP_TEST_CONTROLS" {
+  default = "disabled"
+}
 
 
 # taken from TF_VAR_* environment variables or set on TF cloud
@@ -32,7 +34,9 @@ variable "EMPIRICA_ADMIN_PW" {
   sensitive = true
 }
 
-variable "region" {}
+variable "region" {
+  default = "us-east-1"
+}
 
 
 
