@@ -8,12 +8,16 @@ data "aws_s3_bucket" "wattslab-deliberation-backup" {
     bucket = "wattslab-deliberation-backup"
 }
 
+data "aws_subnet" "public1" {
+    id = data.terraform_remote_state.shared.outputs.aws_subnet_public1_id
+}
+
 resource "aws_datasync_location_efs" "sourceEFS" {
     efs_file_system_arn = aws_efs_mount_target.efs_mount_target.file_system_arn
 
     ec2_config {
         security_group_arns = [aws_security_group.efs_sg.arn]
-        subnet_arn          = data.terraform_remote_state.shared.outputs.aws_subnet_public1_arn
+        subnet_arn          = data.aws_subnet.public1.arn
     }
 } 
 
