@@ -65,7 +65,7 @@ resource "aws_iam_role" "app_ecs_task_role" {
 }
 
 resource "aws_iam_role" "datasync_role" {
-  name = "${var.app_name}_datasync_role"
+  name = "datasync_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
