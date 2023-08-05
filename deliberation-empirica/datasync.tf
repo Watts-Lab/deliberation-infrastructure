@@ -13,7 +13,7 @@ resource "aws_datasync_location_efs" "sourceEFS" {
 
     ec2_config {
         security_group_arns = [aws_security_group.efs_sg.arn]
-        subnet_arns         = [data.terraform_remote_state.shared.outputs.aws_subnet_public1_arn]
+        subnet_arn          = data.terraform_remote_state.shared.outputs.aws_subnet_public1_arn
     }
 } 
 
