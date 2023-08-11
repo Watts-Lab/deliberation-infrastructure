@@ -12,7 +12,7 @@ terraform {
   # Restrictions: can only have one cloud block, can not use with state backends, cannot refer to named values
   cloud {
     organization = "css-lab-deliberation"
-    workspaces { 
+    workspaces {
       tags = ["deliberation"] #need to have each workspace tagged with deliberation manually
     }
   }
@@ -24,9 +24,10 @@ provider "aws" {
   profile = "aws-csslab-deliberation-seas-acct-PennAccountAdministrator"
   default_tags { #tags are used for resources not directly managed by Terraform
     tags = {
-      project  = "deliberation"
-      app      = "deliberation-empirica"
-      deployBy = "terraform"
+      project   = "deliberation"
+      app       = "deliberation-empirica"
+      deployBy  = "terraform"
+      workspace = terraform.workspace
     }
   }
 }

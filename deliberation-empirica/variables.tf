@@ -1,7 +1,12 @@
 # app-specific variables
-variable "app_name" {}
-variable "org_name" {} 
-variable "shared_workspace_name" {}
+variable "region" {
+  default = "us-east-1"
+}
+variable "environment" {
+  default = "prod"
+}
+
+variable "org_name" {}
 
 variable "app_data_path" {
   type        = string
@@ -34,9 +39,7 @@ variable "EMPIRICA_ADMIN_PW" {
   sensitive = true
 }
 
-variable "region" {
-  default = "us-east-1"
-}
+
 
 
 
