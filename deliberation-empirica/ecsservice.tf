@@ -1,7 +1,7 @@
 // The container for the service
 resource "aws_ecs_service" "study" {
   name                               = "study-service"
-  cluster                            = data.terraform_remote_state.shared.outputs.aws_ecs_cluster_id
+  cluster                            = data.terraform_remote_state.shared.outputs.aws_ecs_cluster_shared_cluster_id
   task_definition                    = aws_ecs_task_definition.launch_study_container.arn
   desired_count                      = 1
   deployment_minimum_healthy_percent = 50
@@ -10,12 +10,12 @@ resource "aws_ecs_service" "study" {
   enable_execute_command             = true
 
   network_configuration {
-    security_groups  = [data.terraform_remote_state.shared.outputs.aws_security_group_ecs_service_study_sg_id]
+    security_groups  = [data.terraform_remote_state.shared.outputs.aws_security_group_ecs_services_id]
     subnets          = [data.terraform_remote_state.shared.outputs.aws_subnet_public1_id, data.terraform_remote_state.shared.outputs.aws_subnet_public2_id]
     assign_public_ip = true
   }
   load_balancer {
-    target_group_arn = data.terraform_remote_state.shared.outputs.aws_alb_study_target_group_arn
+    target_group_arn = data.terraform_remote_state.shared.outputs.aws_lb_target_group_study_arn
     container_name   = "study_container_${var.environment}"
     container_port   = "3000"
   }
