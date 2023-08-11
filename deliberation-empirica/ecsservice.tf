@@ -15,8 +15,8 @@ resource "aws_ecs_service" "study" {
     assign_public_ip = true
   }
   load_balancer {
-    target_group_arn = data.terraform_remote_state.shared.outputs.aws_lb_target_group_app_alb_target_group_arn
-    container_name   = var.app_name //this might need to change
+    target_group_arn = data.terraform_remote_state.shared.outputs.aws_alb_study_target_group_arn
+    container_name   = "study_container_${var.environment}"
     container_port   = "3000"
   }
 }
@@ -32,12 +32,12 @@ resource "aws_ecs_task_definition" "launch_study_container" {
   cpu                      = 512
   container_definitions = jsonencode([
     {
-      "name" : "study_container_${var.region}_${var.environment}",
+      "name" : "study_container_${var.environment}",
       "image" : "ghcr.io/watts-lab/deliberation-empirica:${var.deliberation_empirica_tag}",
       "cpu" : 0,
       "portMappings" : [
         {
-          "name" : "${var.app_name}_tcp_3000",
+          "name" : "study_tcp_3000",
           "containerPort" : 3000,
           "hostPort" : 3000,
           "protocol" : "tcp",
@@ -74,19 +74,19 @@ resource "aws_ecs_task_definition" "launch_study_container" {
           value = var.EMPIRICA_ADMIN_PW
         },
         {
-          name = "DATA_DIR",
+          name  = "DATA_DIR",
           value = var.app_data_path
         },
         {
-          name = "CONTAINER_IMAGE_VERSION_TAG",
+          name  = "CONTAINER_IMAGE_VERSION_TAG",
           value = var.deliberation_empirica_tag
         },
         {
-          name = "AWS_REGION",
+          name  = "AWS_REGION",
           value = var.region
         },
         {
-          name = "ENVIRONMENT", 
+          name  = "ENVIRONMENT",
           value = var.environment
         }
       ],
@@ -102,7 +102,7 @@ resource "aws_ecs_task_definition" "launch_study_container" {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-create-group" : "true",
-          "awslogs-group" : "study_container_${var.region}_${var.environment}",
+          "awslogs-group" : "study_container_${var.environment}",
           "awslogs-region" : var.region,
           "awslogs-stream-prefix" : "ecs"
           # do we want non-blocking logstreams?

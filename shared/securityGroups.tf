@@ -1,4 +1,7 @@
-// defines security groups for services that have their own terraform workspaces, including:
+// Shared security group for services that need to connect to the shared alb
+// and to the efs. 
+
+// including:
 // 1. study service
 // 2. scheduling service
 // 3. video coding service
@@ -6,9 +9,9 @@
 // This means that outputs from the top level / shared workspace can be imported
 // into the other services, but we don't need to know about those services here.
 
-resource "aws_security_group" "ecs_service_study" {
+resource "aws_security_group" "ecs_services" {
   // can be reused by all instances of the study service in the region
-  name   = "ecs_service_study_sg_${var.environment}"
+  name   = "ecs_services_sg"
   vpc_id = aws_vpc.shared_vpc.id
   ingress {
     from_port        = 3000
@@ -21,7 +24,7 @@ resource "aws_security_group" "ecs_service_study" {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    security_groups = [aws_security_group.app_alb_sg.id]
+    security_groups = [aws_security_group.shared_alb.id]
   }
   egress {
     from_port        = 0

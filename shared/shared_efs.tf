@@ -10,30 +10,30 @@
 // In addition, it will be backed up to S3 by datasync
 
 resource "aws_efs_file_system" "shared_efs" {
-  creation_token = "shared_efs_${var.region}"
+  creation_token = "shared_efs"
   tags = {
-    Name = "shared_efs_${var.region}"
+    Name = "shared_efs"
   }
   encrypted = true
 }
 
-resource "aws_efs_mount_target" "shared_efs_mount_target" {
+resource "aws_efs_mount_target" "shared_efs" {
   file_system_id  = aws_efs_file_system.shared_efs.id
-  subnet_id       = aws_subnet.public1.id # EFS mount target must be in at least one availability zone
-  security_groups = [aws_security_group.efs_sg.id]
+  subnet_id       = aws_subnet.public1.id # EFS mount target must be in at least one availability zone Q: What does this mean?
+  security_groups = [aws_security_group.shared_efs.id]
 }
 
-resource "aws_security_group" "efs_sg" {
-  name        = "shared_efs_sg_${var.region}"
-  description = "Security group for Shared EFS in region ${var.region}"
+resource "aws_security_group" "shared_efs" {
+  name        = "shared_efs_sg"
+  description = "Security group for Shared EFS"
   vpc_id      = aws_vpc.shared_vpc.id
 
   ingress {
-    description     = "Allow from study services"
+    description     = "Allow from empirca services (study, scheduling, video-coding)"
     from_port       = 2049
     to_port         = 2049
     protocol        = "tcp"
-    security_groups = [aws_security_group.ecs_service_study.id]
+    security_groups = [aws_security_group.ecs_services.id]
   }
 
   ingress {
@@ -41,7 +41,7 @@ resource "aws_security_group" "efs_sg" {
     from_port       = 2049
     to_port         = 2049
     protocol        = "tcp"
-    security_groups = [aws_security_group.datasync-efs-source.id]
+    security_groups = [aws_security_group.data_backup_source.id]
   }
 
   # Allow all outbound traffic by default

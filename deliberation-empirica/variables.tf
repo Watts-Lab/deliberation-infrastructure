@@ -6,10 +6,7 @@ variable "environment" {
   default = "prod"
 }
 
-
-variable "app_name" {}
 variable "org_name" {}
-variable "shared_workspace_name" {}
 
 variable "app_data_path" {
   type        = string

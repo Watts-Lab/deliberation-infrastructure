@@ -4,7 +4,7 @@ data "terraform_remote_state" "shared" {
   config = {
     organization = var.org_name
     workspaces = {
-      name = var.shared_workspace_name
+      name = "shared"
     }
   }
 }

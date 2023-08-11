@@ -24,9 +24,10 @@ provider "aws" {
   profile = "aws-csslab-deliberation-seas-acct-PennAccountAdministrator"
   default_tags { #tags are used for resources not directly managed by Terraform
     tags = {
-      project  = "deliberation"
-      app      = "deliberation-empirica"
-      deployBy = "terraform"
+      project   = "deliberation"
+      app       = "deliberation-empirica"
+      deployBy  = "terraform"
+      workspace = terraform.workspace
     }
   }
 }

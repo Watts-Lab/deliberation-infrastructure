@@ -27,6 +27,7 @@ provider "aws" {
       project  = "deliberation"
       app      = "empirica-scheduler"
       deployBy = "terraform"
+      workspace = terraform.workspace
     }
   }
 }
