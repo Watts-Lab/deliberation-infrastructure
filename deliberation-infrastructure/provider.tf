@@ -12,7 +12,7 @@ terraform {
   # Restrictions: can only have one cloud block, can not use with state backends, cannot refer to named values
   cloud {
     organization = "css-lab-deliberation"
-    workspaces { 
+    workspaces {
       tags = ["deliberation"] #need to have each workspace tagged with deliberation manually
     }
   }

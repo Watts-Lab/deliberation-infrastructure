@@ -64,8 +64,8 @@ resource "aws_iam_role" "app_ecs_task_role" {
   ]
 }
 
-resource "aws_iam_role" "datasync_role" {
-  name = "datasync_role"
+resource "aws_iam_role" "datasync" {
+  name = "datasync"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -76,7 +76,7 @@ resource "aws_iam_role" "datasync_role" {
           Service = "datasync.amazonaws.com"
         }
         Effect = "Allow"
-        Sid    = ""
+        Sid    = "" // do I need this? what is it?
       }
     ]
   })

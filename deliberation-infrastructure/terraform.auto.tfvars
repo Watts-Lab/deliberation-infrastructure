@@ -6,5 +6,5 @@ public_subnet2      = "10.0.20.0/24"
 acm_certificate_arn = "arn:aws:acm:us-east-1:941654414269:certificate/e0e19345-4917-4e54-a87a-01ee32812046"
 security_group_name = "delib-empirica"
 # app-specific variables
-app_name             = "delib-infra"
+app_name = "delib-infra"
 

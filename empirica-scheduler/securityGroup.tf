@@ -1,7 +1,7 @@
 resource "aws_security_group" "efs_sg" {
   name        = "${var.app_name}-efs-sg"
   description = "${var.app_name} EFS security group"
-  vpc_id      = data.terraform_remote_state.shared.outputs.aws_vpc_project_vpc_id
+  vpc_id      = data.terraform_remote_state.shared.outputs.aws_vpc_shared_vpc_id
 
   ingress {
     description     = "Allow only from fargate service"

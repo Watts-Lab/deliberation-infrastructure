@@ -2,7 +2,7 @@
 # syntax: resource type localName - name is only used in this module's scope
 # config settings within each block is dependent on the resource type
 
-resource "aws_lb" "app_alb" { 
+resource "aws_lb" "app_alb" {
   name                       = "${var.app_name}-alb"
   internal                   = false
   load_balancer_type         = "application"
@@ -14,7 +14,7 @@ resource "aws_lb_target_group" "app_alb_target_group" {
   name        = "${var.app_name}-target-group"
   port        = 3000
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.project_vpc.id
+  vpc_id      = aws_vpc.shared_vpc.id
   target_type = "ip"
   health_check {
     healthy_threshold   = "3"
@@ -65,4 +65,21 @@ resource "aws_lb_listener" "HTTPS" {
   }
 }
 
-
+resource "aws_security_group" "app_alb_sg" {
+  name   = "${var.security_group_name}_alb_sg"
+  vpc_id = aws_vpc.shared_vpc.id
+  ingress {
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
