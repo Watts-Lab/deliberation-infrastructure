@@ -25,8 +25,8 @@ resource "aws_ecs_service" "study" {
 resource "aws_ecs_task_definition" "launch_study_container" {
   family                   = "study-task"
   network_mode             = "awsvpc"
-  task_role_arn            = data.terraform_remote_state.shared.outputs.aws_iam_role_app_ecs_task_role_arn
-  execution_role_arn       = data.terraform_remote_state.shared.outputs.aws_iam_role_app_ecs_task_execution_role_arn
+  task_role_arn            = data.terraform_remote_state.shared.outputs.aws_iam_role_ecs_task_role_arn
+  execution_role_arn       = data.terraform_remote_state.shared.outputs.aws_iam_role_ecs_task_exec_role_arn
   requires_compatibilities = ["FARGATE"]
   memory                   = 1024
   cpu                      = 512
@@ -105,7 +105,7 @@ resource "aws_ecs_task_definition" "launch_study_container" {
           "awslogs-group" : "study_container_${var.environment}",
           "awslogs-region" : var.region,
           "awslogs-stream-prefix" : "ecs"
-          # do we want non-blocking logstreams?
+          # Q: do we want non-blocking logstreams?
         }
       }
     }
