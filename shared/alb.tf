@@ -57,8 +57,8 @@ resource "aws_lb_listener_rule" "subdomain_study" {
   }
 
   condition {
-    path_pattern {
-      values = ["study.deliberation-lab.org*"]
+    host_header {
+      values = ["study.deliberation-lab.org"]
     }
   }
 
@@ -74,8 +74,8 @@ resource "aws_lb_listener_rule" "subdomain_scheduler" {
   }
 
   condition {
-    path_pattern {
-      values = ["scheduler.deliberation-lab.org*"]
+    host_header {
+      values = ["scheduler.deliberation-lab.org"]
     }
   }
 }
