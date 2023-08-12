@@ -58,7 +58,7 @@ resource "aws_lb_listener_rule" "subdomain_study" {
 
   condition {
     host_header {
-      values = ["study.deliberation-lab.org*"]
+      values = ["study.deliberation-lab.org"]
     }
   }
 
