@@ -88,6 +88,38 @@ resource "aws_ecs_task_definition" "launch_study_container" {
         {
           name  = "ENVIRONMENT",
           value = var.environment
+        },
+        {
+          name  = "GITHUB_PRIVATE_DATA_OWNER",
+          value = var.GITHUB_PRIVATE_DATA_OWNER
+        },
+        {
+          name  = "GITHUB_PUBLIC_DATA_OWNER",
+          value = var.GITHUB_PUBLIC_DATA_OWNER
+        },
+        {
+          name  = "GITHUB_PRIVATE_DATA_REPO",
+          value = var.GITHUB_PRIVATE_DATA_REPO
+        },
+        {
+          name  = "GITHUB_PUBLIC_DATA_REPO",
+          value = var.GITHUB_PUBLIC_DATA_REPO
+        },
+        {
+          name  = "GITHUB_PRIVATE_DATA_BRANCH",
+          value = var.GITHUB_PRIVATE_DATA_BRANCH
+        },
+        {
+          name  = "GITHUB_PUBLIC_DATA_BRANCH",
+          value = var.GITHUB_PUBLIC_DATA_BRANCH
+        },
+        {
+          name  = "ETHERPAD_API_KEY",
+          value = var.ETHERPAD_API_KEY
+        },
+        {
+          name  = "ETHERPAD_BASE_URL",
+          value = var.ETHERPAD_BASE_URL
         }
       ],
       mountPoints = [
