@@ -39,6 +39,21 @@ variable "EMPIRICA_ADMIN_PW" {
   sensitive = true
 }
 
+variable "GITHUB_PRIVATE_DATA_OWNER" {}
+variable "GITHUB_PUBLIC_DATA_OWNER" {}
+variable "GITHUB_PRIVATE_DATA_REPO" {}
+variable "GITHUB_PUBLIC_DATA_REPO" {}
+variable "GITHUB_PRIVATE_DATA_BRANCH" {
+  default = "main"
+}
+variable "GITHUB_PUBLIC_DATA_BRANCH" {
+  default = "main"
+}
+variable "ETHERPAD_API_KEY" {
+  sensitive = true
+}
+variable "ETHERPAD_BASE_URL" {}
+
 
 
 
