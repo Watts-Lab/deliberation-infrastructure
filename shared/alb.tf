@@ -61,6 +61,9 @@ resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
     host_header {
       values = ["study.deliberation-lab.org"]
     }
+  }
+
+  condition {
     path_pattern {
       values = ["/etherpad*"]
     }
