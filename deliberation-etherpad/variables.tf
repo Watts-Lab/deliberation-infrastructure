@@ -14,7 +14,7 @@ variable "deliberation_etherpad_tag" {
   description = "Docker image tag for deliberation-etherpad"
 }
 
-variable "admin_pw" {
+variable "ADMIN_PASSWORD" {
   type        = string
   description = "etherpad admin interface password"
 }

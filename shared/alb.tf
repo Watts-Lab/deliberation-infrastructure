@@ -50,7 +50,7 @@ resource "aws_lb_listener" "HTTPS" {
 
 resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
   listener_arn = aws_lb_listener.HTTPS.arn
-  priority     = 100
+  priority     = 90 // lower values get evaluated first
 
   action {
     type             = "forward"
@@ -70,7 +70,7 @@ resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
 
 resource "aws_lb_listener_rule" "subdomain_study" {
   listener_arn = aws_lb_listener.HTTPS.arn
-  priority     = 200
+  priority     = 100 // lower values get evaluated first
 
   action {
     type             = "forward"
