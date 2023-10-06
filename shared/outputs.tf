@@ -29,6 +29,11 @@ output "aws_lb_target_group_scheduler_arn" {
   value       = aws_lb_target_group.scheduler.arn
 }
 
+output "aws_lb_target_group_etherpad_arn" {
+  description = "ARN for etherpad target group from shared load balancer"
+  value       = aws_lb_target_group.etherpad.arn
+}
+
 // securityGroups.tf
 output "aws_security_group_ecs_services_id" {
   description = "security group id for empirica ecs services"

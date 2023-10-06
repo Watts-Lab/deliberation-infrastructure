@@ -25,6 +25,7 @@ resource "aws_lb_listener" "HTTP" {
   }
 }
 
+
 // Listen for HTTPS traffic on port 443
 // below we add rules to forward to target group based on subdomain
 resource "aws_lb_listener" "HTTPS" {
@@ -47,13 +48,33 @@ resource "aws_lb_listener" "HTTPS" {
   }
 }
 
-resource "aws_lb_listener_rule" "subdomain_study" {
+resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
   listener_arn = aws_lb_listener.HTTPS.arn
   priority     = 100
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.study.arn
+    target_group_arn = aws_lb_target_group.etherpad.arn
+  }
+
+  condition {
+    host_header {
+      values = ["study.deliberation-lab.org"]
+    }
+    path_pattern {
+      values = ["/etherpad*"]
+    }
+  }
+
+}
+
+resource "aws_lb_listener_rule" "subdomain_study" {
+  listener_arn = aws_lb_listener.HTTPS.arn
+  priority     = 200
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.etherpad.arn
   }
 
   condition {
@@ -83,6 +104,8 @@ resource "aws_lb_listener_rule" "subdomain_scheduler" {
 // Todo: add rules for researcher subdomain
 
 // Containers will attach to their respective target groups
+// We export the arns for these target groups in outputs.tf,
+// and then the container services themselves will use them.
 resource "aws_lb_target_group" "study" {
   name        = "study-target-group"
   port        = 3000
@@ -102,6 +125,22 @@ resource "aws_lb_target_group" "study" {
 resource "aws_lb_target_group" "scheduler" {
   name        = "scheduler-target-group"
   port        = 3000
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.shared_vpc.id
+  target_type = "ip"
+  health_check {
+    healthy_threshold   = "3"
+    interval            = "30"
+    protocol            = "HTTP"
+    matcher             = "200"
+    timeout             = "3"
+    unhealthy_threshold = "2"
+  }
+}
+
+resource "aws_lb_target_group" "etherpad" {
+  name        = "scheduler-target-group"
+  port        = 9001
   protocol    = "HTTP"
   vpc_id      = aws_vpc.shared_vpc.id
   target_type = "ip"
