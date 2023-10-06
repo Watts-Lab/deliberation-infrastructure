@@ -139,7 +139,7 @@ resource "aws_lb_target_group" "scheduler" {
 }
 
 resource "aws_lb_target_group" "etherpad" {
-  name        = "scheduler-target-group"
+  name        = "etherpad-target-group"
   port        = 9001
   protocol    = "HTTP"
   vpc_id      = aws_vpc.shared_vpc.id
