@@ -143,7 +143,7 @@ resource "aws_lb_target_group" "scheduler" {
 
 resource "aws_lb_target_group" "etherpad" {
   name        = "etherpad-target-group"
-  port        = 9001
+  port        = 80 // caddy will listen on port 80 and redirect to etherpad on the container
   protocol    = "HTTP"
   vpc_id      = aws_vpc.shared_vpc.id
   target_type = "ip"
