@@ -17,7 +17,7 @@ resource "aws_ecs_service" "etherpad" {
   load_balancer {
     target_group_arn = data.terraform_remote_state.shared.outputs.aws_lb_target_group_etherpad_arn
     container_name   = "etherpad_container_${var.environment}"
-    container_port   = "9001"
+    container_port   = "80"
   }
 }
 
