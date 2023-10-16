@@ -37,9 +37,9 @@ resource "aws_ecs_task_definition" "launch_etherpad_container" {
       "cpu" : 0,
       "portMappings" : [
         {
-          "name" : "etherpad_tcp_9001",
-          "containerPort" : 9001,
-          "hostPort" : 9001,
+          "name" : "etherpad_tcp_80",
+          "containerPort" : 80,
+          "hostPort" : 80,
           "protocol" : "tcp",
           "appProtocol" : "http"
         }
