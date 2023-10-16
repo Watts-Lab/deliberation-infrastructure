@@ -19,6 +19,11 @@ variable "ADMIN_PASSWORD" {
   description = "etherpad admin interface password"
 }
 
+variable "APIKEY" {
+  type        = string
+  description = "etherpad api key"
+}
+  
 
 
 

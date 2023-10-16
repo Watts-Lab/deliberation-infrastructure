@@ -63,7 +63,7 @@ resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
     }
   }
 
-  condition {
+  condition { // all conditions must be met
     path_pattern {
       values = ["/etherpad*"]
     }

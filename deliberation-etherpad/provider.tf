@@ -25,7 +25,7 @@ provider "aws" {
   default_tags { #tags are used for resources not directly managed by Terraform
     tags = {
       project   = "deliberation"
-      app       = "deliberation-empirica"
+      app       = "deliberation-etherpad"
       deployBy  = "terraform"
       workspace = terraform.workspace
     }

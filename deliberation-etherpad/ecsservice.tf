@@ -53,6 +53,10 @@ resource "aws_ecs_task_definition" "launch_etherpad_container" {
           name  = "ADMIN_PASSWORD",
           value = var.ADMIN_PASSWORD
         },
+        { 
+          name = "APIKEY",
+          value = var.APIKEY
+        }
       ],
 
       "logConfiguration" : {
