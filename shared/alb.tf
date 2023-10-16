@@ -110,7 +110,7 @@ resource "aws_lb_listener_rule" "subdomain_scheduler" {
 // We export the arns for these target groups in outputs.tf,
 // and then the container services themselves will use them.
 resource "aws_lb_target_group" "study" {
-  name_prefix = "study-target-group"
+  name_prefix = "study"
   port        = 3000
   protocol    = "HTTP"
   vpc_id      = aws_vpc.shared_vpc.id
@@ -129,7 +129,7 @@ resource "aws_lb_target_group" "study" {
 }
 
 resource "aws_lb_target_group" "scheduler" {
-  name_prefix = "scheduler-target-group"
+  name_prefix = "shdulr"
   port        = 3000
   protocol    = "HTTP"
   vpc_id      = aws_vpc.shared_vpc.id
@@ -148,7 +148,7 @@ resource "aws_lb_target_group" "scheduler" {
 }
 
 resource "aws_lb_target_group" "etherpad" {
-  name_prefix = "etherpad-target-group"
+  name_prefix = "ethrpd"
   port        = 80 // caddy will listen on port 80 and redirect to etherpad on the container
   protocol    = "HTTP"
   vpc_id      = aws_vpc.shared_vpc.id
