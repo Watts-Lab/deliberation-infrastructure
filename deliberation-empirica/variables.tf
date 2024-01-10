@@ -1,4 +1,8 @@
 # app-specific variables
+
+variable "subdomain" {
+  default = "study"
+}
 variable "region" {
   default = "us-east-1"
 }

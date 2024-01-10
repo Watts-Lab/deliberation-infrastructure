@@ -18,16 +18,27 @@ output "aws_subnet_public2_id" {
   value       = aws_subnet.public2.id
 }
 
-//alb.tf
-output "aws_lb_target_group_study_arn" {
-  description = "ARN for study target group from shared load balancer"
-  value       = aws_lb_target_group.study.arn
+// alb.tf
+
+output "aws_lb_shared_alb_dns_name" {
+  description = "aws_lb.shared_alb.dns_name"
+  value       = aws_lb.shared_alb.dns_name
 }
 
-output "aws_lb_target_group_scheduler_arn" {
-  description = "ARN for scheduler target group from shared load balancer"
-  value       = aws_lb_target_group.scheduler.arn
+output "aws_lb_shared_alb_zone_id" {
+  description = "aws_lb.shared_alb.zone_id"
+  value       = aws_lb.shared_alb.zone_id
 }
+output "aws_lb_listener_HTTPS_arn" {
+  description = "aws_lb_listener.HTTPS.arn"
+  value       = aws_lb_listener.HTTPS.arn
+
+}
+
+# output "aws_lb_target_group_scheduler_arn" {
+#   description = "ARN for scheduler target group from shared load balancer"
+#   value       = aws_lb_target_group.scheduler.arn
+# }
 
 output "aws_lb_target_group_etherpad_arn" {
   description = "ARN for etherpad target group from shared load balancer"
