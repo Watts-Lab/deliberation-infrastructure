@@ -43,7 +43,7 @@ resource "aws_lb_target_group" "empirica" {
 
 
 resource "aws_lb_listener_rule" "study_subdomain_etherpad_forward" {
-  listener_arn = aws_lb_listener.HTTPS.arn
+  listener_arn = data.terraform_remote_state.shared.outputs.aws_lb_listener_HTTPS_arn
   priority     = 90 // lower values get evaluated first
 
   action {
