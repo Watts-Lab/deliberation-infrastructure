@@ -138,7 +138,7 @@ resource "aws_ecs_task_definition" "empirica" {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-create-group" : "true",
-          "awslogs-group" : "empirica_service_${var.subdomain}",
+          "awslogs-group" : "${var.subdomain}.deliberation-lab.org",
           "awslogs-region" : var.region,
           "awslogs-stream-prefix" : "ecs"
         }

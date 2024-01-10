@@ -49,28 +49,27 @@ resource "aws_lb_listener" "HTTPS" {
   }
 }
 
-resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
-  listener_arn = aws_lb_listener.HTTPS.arn
-  priority     = 90 // lower values get evaluated first
+# resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
+#   listener_arn = aws_lb_listener.HTTPS.arn
+#   priority     = 90 // lower values get evaluated first
 
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.etherpad.arn
-  }
+#   action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.etherpad.arn
+#   }
 
-  condition {
-    host_header {
-      values = ["study.deliberation-lab.org"]
-    }
-  }
+#   condition {
+#     host_header {
+#       values = ["study.deliberation-lab.org"]
+#     }
+#   }
 
-  condition { // all conditions must be met
-    path_pattern {
-      values = ["/etherpad*"]
-    }
-  }
-
-}
+#   condition { // all conditions must be met
+#     path_pattern {
+#       values = ["/etherpad*"]
+#     }
+#   }
+# }
 
 # resource "aws_lb_listener_rule" "subdomain_study" {
 #   listener_arn = aws_lb_listener.HTTPS.arn
@@ -89,21 +88,21 @@ resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
 
 # }
 
-resource "aws_lb_listener_rule" "subdomain_scheduler" {
-  listener_arn = aws_lb_listener.HTTPS.arn
-  priority     = 200 // lower values get evaluated first
+# resource "aws_lb_listener_rule" "subdomain_scheduler" {
+#   listener_arn = aws_lb_listener.HTTPS.arn
+#   priority     = 200 // lower values get evaluated first
 
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.scheduler.arn
-  }
+#   action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.scheduler.arn
+#   }
 
-  condition {
-    host_header {
-      values = ["scheduler.deliberation-lab.org"]
-    }
-  }
-}
+#   condition {
+#     host_header {
+#       values = ["scheduler.deliberation-lab.org"]
+#     }
+#   }
+# }
 
 // Todo: add rules for researcher subdomain
 
@@ -130,24 +129,24 @@ resource "aws_lb_listener_rule" "subdomain_scheduler" {
 #   }
 # }
 
-resource "aws_lb_target_group" "scheduler" {
-  name_prefix = "shdulr"
-  port        = 3000
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.shared_vpc.id
-  target_type = "ip"
-  health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
-    protocol            = "HTTP"
-    matcher             = "200"
-    timeout             = "3"
-    unhealthy_threshold = "2"
-  }
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+# resource "aws_lb_target_group" "scheduler" {
+#   name_prefix = "shdulr"
+#   port        = 3000
+#   protocol    = "HTTP"
+#   vpc_id      = aws_vpc.shared_vpc.id
+#   target_type = "ip"
+#   health_check {
+#     healthy_threshold   = "3"
+#     interval            = "30"
+#     protocol            = "HTTP"
+#     matcher             = "200"
+#     timeout             = "3"
+#     unhealthy_threshold = "2"
+#   }
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
 
 resource "aws_lb_target_group" "etherpad" {
   name_prefix = "ethrpd"
