@@ -71,6 +71,7 @@ resource "aws_lb_listener" "HTTPS" {
 #   }
 # }
 
+
 # resource "aws_lb_listener_rule" "subdomain_study" {
 #   listener_arn = aws_lb_listener.HTTPS.arn
 #   priority     = 100 // lower values get evaluated first
@@ -88,6 +89,7 @@ resource "aws_lb_listener" "HTTPS" {
 
 # }
 
+
 # resource "aws_lb_listener_rule" "subdomain_scheduler" {
 #   listener_arn = aws_lb_listener.HTTPS.arn
 #   priority     = 200 // lower values get evaluated first
@@ -103,6 +105,7 @@ resource "aws_lb_listener" "HTTPS" {
 #     }
 #   }
 # }
+
 
 // Todo: add rules for researcher subdomain
 
