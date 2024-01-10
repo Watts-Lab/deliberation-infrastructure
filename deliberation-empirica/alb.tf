@@ -23,7 +23,7 @@ resource "aws_lb_listener_rule" "study_subdomain" {
 }
 
 resource "aws_lb_target_group" "empirica" {
-  name_prefix = var.subdomain
+  name_prefix = "study"
   port        = 3000
   protocol    = "HTTP"
   vpc_id      = data.terraform_remote_state.shared.outputs.aws_vpc_shared_vpc_id
