@@ -28,6 +28,7 @@ provider "aws" {
       app       = "deliberation-empirica"
       deployBy  = "terraform"
       workspace = terraform.workspace
+      subdomain = var.subdomain
     }
   }
 }

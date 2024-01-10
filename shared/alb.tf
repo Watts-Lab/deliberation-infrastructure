@@ -28,6 +28,7 @@ resource "aws_lb_listener" "HTTP" {
 
 // Listen for HTTPS traffic on port 443
 // below we add rules to forward to target group based on subdomain
+// we also output this so that other services can attach to it
 resource "aws_lb_listener" "HTTPS" {
   load_balancer_arn = aws_lb.shared_alb.arn
   port              = "443"
@@ -71,22 +72,22 @@ resource "aws_lb_listener_rule" "subdomain_study_path_etherpad" {
 
 }
 
-resource "aws_lb_listener_rule" "subdomain_study" {
-  listener_arn = aws_lb_listener.HTTPS.arn
-  priority     = 100 // lower values get evaluated first
+# resource "aws_lb_listener_rule" "subdomain_study" {
+#   listener_arn = aws_lb_listener.HTTPS.arn
+#   priority     = 100 // lower values get evaluated first
 
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.study.arn
-  }
+#   action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.study.arn
+#   }
 
-  condition {
-    host_header {
-      values = ["study.deliberation-lab.org"]
-    }
-  }
+#   condition {
+#     host_header {
+#       values = ["study.deliberation-lab.org"]
+#     }
+#   }
 
-}
+# }
 
 resource "aws_lb_listener_rule" "subdomain_scheduler" {
   listener_arn = aws_lb_listener.HTTPS.arn
@@ -109,24 +110,25 @@ resource "aws_lb_listener_rule" "subdomain_scheduler" {
 // Containers will attach to their respective target groups
 // We export the arns for these target groups in outputs.tf,
 // and then the container services themselves will use them.
-resource "aws_lb_target_group" "study" {
-  name_prefix = "study"
-  port        = 3000
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.shared_vpc.id
-  target_type = "ip"
-  health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
-    protocol            = "HTTP"
-    matcher             = "200"
-    timeout             = "3"
-    unhealthy_threshold = "2"
-  }
-  lifecycle {
-    create_before_destroy = true
-  }
-}
+
+# resource "aws_lb_target_group" "study" {
+#   name_prefix = "study"
+#   port        = 3000
+#   protocol    = "HTTP"
+#   vpc_id      = aws_vpc.shared_vpc.id
+#   target_type = "ip"
+#   health_check {
+#     healthy_threshold   = "3"
+#     interval            = "30"
+#     protocol            = "HTTP"
+#     matcher             = "200"
+#     timeout             = "3"
+#     unhealthy_threshold = "2"
+#   }
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
 
 resource "aws_lb_target_group" "scheduler" {
   name_prefix = "shdulr"

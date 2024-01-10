@@ -9,9 +9,7 @@ Use a single vpc for everything.
 ### Load balancer
 
 We define one load balancer for all traffic coming in under any subdomain.
-Recognized subdomains are `study` and `scheduler`.
 Traffic to these subdomains gets redirected to the appropriate services.
-Other traffic is redirected to the project webpage.
 
 ### Security Groups
 

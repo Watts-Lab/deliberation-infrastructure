@@ -1,8 +1,8 @@
-// The container for the service
-resource "aws_ecs_service" "study" {
-  name                               = "study-service"
+// The empirica service 
+resource "aws_ecs_service" "empirica" {
+  name                               = "${var.subdomain}-empirica-service"
   cluster                            = data.terraform_remote_state.shared.outputs.aws_ecs_cluster_shared_cluster_id
-  task_definition                    = aws_ecs_task_definition.launch_study_container.arn
+  task_definition                    = aws_ecs_task_definition.empirica.arn
   desired_count                      = 1
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
@@ -15,29 +15,29 @@ resource "aws_ecs_service" "study" {
     assign_public_ip = true
   }
   load_balancer {
-    target_group_arn = data.terraform_remote_state.shared.outputs.aws_lb_target_group_study_arn
-    container_name   = "study_container_${var.environment}"
+    target_group_arn = aws_lb_target_group.empirica.arn
+    container_name   = "${var.subdomain}-empirica-container"
     container_port   = "3000"
   }
 }
 
 // Details of the deliberation-empirica study service itself
-resource "aws_ecs_task_definition" "launch_study_container" {
-  family                   = "study-task"
+resource "aws_ecs_task_definition" "empirica" {
+  family                   = "${var.subdomain}-empirica-task"
   network_mode             = "awsvpc"
   task_role_arn            = data.terraform_remote_state.shared.outputs.aws_iam_role_ecs_task_role_arn
   execution_role_arn       = data.terraform_remote_state.shared.outputs.aws_iam_role_ecs_task_exec_role_arn
   requires_compatibilities = ["FARGATE"]
-  memory                   = 1024
-  cpu                      = 512
+  memory                   = 4096
+  cpu                      = 1024
   container_definitions = jsonencode([
     {
-      "name" : "study_container_${var.environment}",
+      "name" : "${var.subdomain}-empirica-container",
       "image" : "ghcr.io/watts-lab/deliberation-empirica:${var.deliberation_empirica_tag}",
       "cpu" : 0,
       "portMappings" : [
         {
-          "name" : "study_tcp_3000",
+          "name" : "empirica_tcp_3000",
           "containerPort" : 3000,
           "hostPort" : 3000,
           "protocol" : "tcp",
@@ -120,6 +120,10 @@ resource "aws_ecs_task_definition" "launch_study_container" {
         {
           name  = "ETHERPAD_BASE_URL",
           value = var.ETHERPAD_BASE_URL
+        },
+        {
+          name  = "SUBDOMAIN",
+          value = var.subdomain
         }
       ],
       mountPoints = [
@@ -134,10 +138,9 @@ resource "aws_ecs_task_definition" "launch_study_container" {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-create-group" : "true",
-          "awslogs-group" : "study_container_${var.environment}",
+          "awslogs-group" : "empirica_service_${var.subdomain}",
           "awslogs-region" : var.region,
           "awslogs-stream-prefix" : "ecs"
-          # Q: do we want non-blocking logstreams?
         }
       }
     }
