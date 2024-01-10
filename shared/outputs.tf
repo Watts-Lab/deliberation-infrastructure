@@ -29,6 +29,7 @@ output "aws_lb_shared_alb_zone_id" {
   description = "aws_lb.shared_alb.zone_id"
   value       = aws_lb.shared_alb.zone_id
 }
+
 output "aws_lb_listener_HTTPS_arn" {
   description = "aws_lb_listener.HTTPS.arn"
   value       = aws_lb_listener.HTTPS.arn
@@ -68,6 +69,10 @@ output "aws_shared_efs_id" {
   value       = aws_efs_file_system.shared_efs.id
 }
 
-
+// route53.tf
+output "aws_route53_zone_apex_zone_id" {
+  description = "aws route53 zone apex zone id"
+  value       = data.aws_route53_zone.apex.zone_id
+}
 
 
