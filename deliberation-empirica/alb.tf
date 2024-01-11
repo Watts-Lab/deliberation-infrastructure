@@ -6,9 +6,14 @@
 // These are separated into different terraform workspaces, so we can use a generic name
 // for each service within the workspace
 
+resource "random_integer" "empirica_priority" {
+  min = 9000
+  max = 9999
+}
+
 resource "aws_lb_listener_rule" "study_subdomain" {
   listener_arn = data.terraform_remote_state.shared.outputs.aws_lb_listener_HTTPS_arn // single HTTPS listener for all subdomains
-  priority     = 100                                                                  // lower values get evaluated first
+  priority     = random_integer.empirica_priority.result                                                                  // lower values get evaluated first
 
   action {
     type             = "forward"
@@ -42,6 +47,10 @@ resource "aws_lb_target_group" "empirica" {
 }
 
 
+resource "random_integer" "etherpad_priority" {
+  min = 8000
+  max = 8999
+}
 resource "aws_lb_listener_rule" "study_subdomain_etherpad_forward" {
   listener_arn = data.terraform_remote_state.shared.outputs.aws_lb_listener_HTTPS_arn
   priority     = 90 // lower values get evaluated first
