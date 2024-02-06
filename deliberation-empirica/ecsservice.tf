@@ -28,8 +28,8 @@ resource "aws_ecs_task_definition" "empirica" {
   task_role_arn            = data.terraform_remote_state.shared.outputs.aws_iam_role_ecs_task_role_arn
   execution_role_arn       = data.terraform_remote_state.shared.outputs.aws_iam_role_ecs_task_exec_role_arn
   requires_compatibilities = ["FARGATE"]
-  memory                   = 4096
-  cpu                      = 1024
+  memory                   = var.memory
+  cpu                      = var.cpu
   container_definitions = jsonencode([
     {
       "name" : "${var.subdomain}-empirica-container",
