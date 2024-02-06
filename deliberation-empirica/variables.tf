@@ -22,6 +22,17 @@ variable "deliberation_empirica_tag" {
   description = "Docker image tag for deliberation-empirica"
 }
 
+variable "memory" {
+  description = "Memory for the ECS service"
+  default     = 1024
+}
+
+variable "cpu" {
+  description = "CPU for the ECS service"
+  default     = 512
+}
+
+
 # app environment variables
 variable "QUALTRICS_DATACENTER" {}
 variable "REACT_APP_TEST_CONTROLS" {
@@ -57,7 +68,6 @@ variable "ETHERPAD_API_KEY" {
   sensitive = true
 }
 variable "ETHERPAD_BASE_URL" {}
-
 
 
 
