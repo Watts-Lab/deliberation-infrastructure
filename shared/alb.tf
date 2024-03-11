@@ -7,6 +7,7 @@ resource "aws_lb" "shared_alb" {
   security_groups            = [aws_security_group.shared_alb.id]
   subnets                    = [aws_subnet.public1.id, aws_subnet.public2.id]
   enable_deletion_protection = false
+  idle_timeout               = 300  // default is 60, increased to try and deal with unhandled connection errors...
 }
 
 // Listen for HTTP traffic on port 80 and redirect to HTTPS
