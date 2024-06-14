@@ -21,7 +21,7 @@ resource "aws_lb_listener_rule" "researcher_subdomain" {
 }
 
 resource "aws_lb_target_group" "researcher_portal" {
-  name_prefix = "researcher"
+  name_prefix = "portal"
   port        = 3000
   protocol    = "HTTP"
   vpc_id      = data.terraform_remote_state.shared.outputs.aws_vpc_shared_vpc_id

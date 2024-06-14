@@ -15,7 +15,7 @@ resource "aws_ecs_service" "researcher_portal" {
     assign_public_ip = true
   }
   load_balancer {
-    target_group_arn = aws_lb_target_group.researcher-portal.arn
+    target_group_arn = aws_lb_target_group.researcher_portal.arn
     container_name   = "researcher-portal-container"
     container_port   = "3000"
   }

@@ -21,12 +21,12 @@ variable "researcher_portal_tag" {
 
 variable "memory" {
   description = "Memory for the ECS service"
-  default     = 1024
+  default     = 256
 }
 
 variable "cpu" {
   description = "CPU for the ECS service"
-  default     = 512
+  default     = 128
 }
 
 
