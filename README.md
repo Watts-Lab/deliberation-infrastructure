@@ -32,3 +32,7 @@ Todo:
 - move security groups for each resource into the file with the resource itself
 - have only one efs per region
 - combine the ecsservice and taskdefinition files
+
+## Documentation
+
+ECS valid container configurations: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
